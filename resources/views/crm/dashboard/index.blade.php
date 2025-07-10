@@ -122,7 +122,7 @@
                         </div>
                     </div>
                 </div>        
-                 {{-- New Members Div --}}
+                 {{-- New Members--}}
                 <div class="flex justify-between h-[30%] lg:h-full w-full lg:w-[30%] gap-5">
                     <div class="flex flex-col bg-white shadow-lg h-full w-full rounded-lg shadow-xs items-center py-4 lg:py-0">
                         {{-- Header --}}
@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="flex flex-col lg:flex-row w-full h-[600px] lg:h-[300px] items-center gap-5 mt-3 lg:-mt-2 md:items-center md:ml-0">
-            {{-- CALENDAR --}}
+            {{-- Calendar --}}
             <div class="flex pt-2 bg-white shadow-lg h-full w-[90%] md:w-[80%] lg:w-[50%] rounded-lg shadow-xs justify-center overflow-y-auto hide-scrollbar mx-auto">
                 <div x-data="calendar()" x-init="init()" class="w-[90%] flex flex-col items-center justify-between">
                     <div class="flex flex-row items-center w-full">
@@ -309,8 +309,7 @@
                 </div>
             </div>
 
-
-            {{-- REVENUE --}}
+            {{-- Revenue --}}
             <div x-data="{activeChart: 'chart1'}" class="flex flex-col bg-white shadow-lg h-full w-[90%] lg:w-[50%] md:w-[80%] rounded-lg shadow-xs justify-center items-center gap-3">
                 <div class="flex flex-row h-[10%] w-[90%] items-center gap-2">
                     <div class="flex flex-row w-[50%] h-full justify-start items-center gap-2">
@@ -332,6 +331,7 @@
                     </div>
                 </div>
                 <div class="flex h-[75%] w-[90%] relative">
+                    {{-- Weekly Revenue --}}
                     <div x-show="activeChart === 'chart1'" x-cloak class="h-full w-full absolute">
                         <x-analytics-display
                                 title="Weekly"
@@ -341,6 +341,7 @@
                                 :color="['#071d49', '#D9CD91', '#330000', '#6600cc', '#00ff00', '#660000', '#666600', '#cc3366', '#cc6600', '#ccff00' ,'#ff0000']"
                         />
                     </div>
+                    {{-- Monthly Revenue --}}
                     <div x-show="activeChart === 'chart2'" x-cloak class="h-full w-full absolute">
                         <x-analytics-display
                                 title="Monthly"
@@ -350,6 +351,7 @@
                                 :color="['#071d49', '#D9CD91', '#330000', '#6600cc', '#00ff00', '#660000', '#666600', '#cc3366', '#cc6600', '#ccff00' ,'#ff0000']"
                         />
                     </div>
+                    {{-- Annual Revenue --}}
                     <div x-show="activeChart === 'chart3'" x-cloak class="h-full w-full absolute">
                         <x-analytics-display
                                 title="Annual"
