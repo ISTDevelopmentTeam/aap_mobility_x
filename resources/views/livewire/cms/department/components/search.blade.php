@@ -1,19 +1,3 @@
-<?php
-
-use Livewire\Volt\Component;
-
-new class extends Component {
-    public function with(): array
-    {
-        return [
-            'categories' => \App\Models\AssetCategory::all(),
-            'statuses' => \App\Models\AssetStatus::all(),
-            'conditions' => \App\Models\AssetCondition::all(),
-            'departments' => \App\Models\Department::all(),
-        ];
-    }
-}; ?>
-
 <div>
     <div x-data="{ open: false }" class="relative flex flex-1 min-w-0 sm:w-72">
         <div
@@ -30,14 +14,14 @@ new class extends Component {
 
             <!-- Search Input -->
             <input type="text" placeholder="Search"
-                class="uppercase text-sm px-2 py-2 w-full bg-transparent border-white outline-none focus:outline-none focus:ring-0 focus:border-white"
+                class="text-sm px-2 py-2 w-full bg-transparent border-white outline-none focus:outline-none focus:ring-0 focus:border-white"
                 x-data
-                @input.debounce.500ms.window="Livewire.dispatch('search-assets', { value: $event.target.value }).to('ams.asset.asset-list')">
+                wire:model.live.debounce.300ms="search">
 
 
 
-            <!-- Filter Button + Tooltip -->
-            <div class="relative group">
+
+            {{-- <div class="relative group">
                 <button @click="open = !open"
                     class="p-2 border-l border-gray-300 hover:bg-gray-100 focus:outline-none relative z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -52,14 +36,13 @@ new class extends Component {
                     class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition z-10">
                     Show Filters
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
 
 
-        <!-- Filter Dropdown -->
-        <!-- Filter Dropdown -->
+        {{-- <!-- Filter Dropdown -->
         <div x-show="open" @click.away="open = false"
             class="absolute right-0 mt-9 w-full sm:w-72 bg-white border border-gray-300 rounded-md shadow-lg z-50 text-sm">
 
@@ -251,6 +234,6 @@ new class extends Component {
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>

@@ -161,6 +161,7 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
             'League\\CommonMark\\' => 18,
             'Laravel\\Tinker\\' => 15,
             'Laravel\\SerializableClosure\\' => 28,
+            'Laravel\\Scout\\' => 14,
             'Laravel\\Sail\\' => 13,
             'Laravel\\Reverb\\' => 15,
             'Laravel\\Prompts\\' => 16,
@@ -235,8 +236,8 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Whoops\\' => 
         array (
@@ -432,8 +433,8 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -517,8 +518,8 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces',
-            1 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -547,6 +548,10 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
+        ),
+        'Laravel\\Scout\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/scout/src',
         ),
         'Laravel\\Sail\\' => 
         array (
@@ -707,6 +712,7 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         'App\\Exceptions\\HandleExceptions' => __DIR__ . '/..' . '/laravel/pint/app/Exceptions/HandleExceptions.php',
         'App\\Factories\\ConfigurationFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationFactory.php',
         'App\\Factories\\ConfigurationResolverFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
+        'App\\Helpers\\Toast' => __DIR__ . '/../..' . '/app/Helpers/Toast.php',
         'App\\Http\\Controllers\\AssetController' => __DIR__ . '/../..' . '/app/Http/Controllers/AssetController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -846,9 +852,15 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         'App\\ValueObjects\\Issue' => __DIR__ . '/..' . '/laravel/pint/app/ValueObjects/Issue.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
+        'App\\View\\Components\\Icon\\Delete' => __DIR__ . '/../..' . '/app/View/Components/Icon/Delete.php',
+        'App\\View\\Components\\Icon\\Edit' => __DIR__ . '/../..' . '/app/View/Components/Icon/Edit.php',
+        'App\\View\\Components\\Icon\\ExclamationTriangle' => __DIR__ . '/../..' . '/app/View/Components/Icon/ExclamationTriangle.php',
+        'App\\View\\Components\\Icon\\XMark' => __DIR__ . '/../..' . '/app/View/Components/Icon/XMark.php',
         'App\\View\\Components\\Modal' => __DIR__ . '/../..' . '/app/View/Components/Modal.php',
         'App\\View\\Components\\ModalBox' => __DIR__ . '/../..' . '/app/View/Components/ModalBox.php',
         'App\\View\\Components\\Navbar' => __DIR__ . '/../..' . '/app/View/Components/Navbar.php',
+        'App\\View\\Components\\Progress' => __DIR__ . '/../..' . '/app/View/Components/Progress.php',
+        'App\\View\\Components\\Toast' => __DIR__ . '/../..' . '/app/View/Components/Toast.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -3873,6 +3885,42 @@ class ComposerStaticInit472de8008b07d2943e70d8a24e2b0fe4
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
+        'Laravel\\Scout\\Attributes\\SearchUsingFullText' => __DIR__ . '/..' . '/laravel/scout/src/Attributes/SearchUsingFullText.php',
+        'Laravel\\Scout\\Attributes\\SearchUsingPrefix' => __DIR__ . '/..' . '/laravel/scout/src/Attributes/SearchUsingPrefix.php',
+        'Laravel\\Scout\\Builder' => __DIR__ . '/..' . '/laravel/scout/src/Builder.php',
+        'Laravel\\Scout\\Console\\DeleteAllIndexesCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/DeleteAllIndexesCommand.php',
+        'Laravel\\Scout\\Console\\DeleteIndexCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/DeleteIndexCommand.php',
+        'Laravel\\Scout\\Console\\FlushCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/FlushCommand.php',
+        'Laravel\\Scout\\Console\\ImportCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/ImportCommand.php',
+        'Laravel\\Scout\\Console\\IndexCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/IndexCommand.php',
+        'Laravel\\Scout\\Console\\QueueImportCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/QueueImportCommand.php',
+        'Laravel\\Scout\\Console\\SyncIndexSettingsCommand' => __DIR__ . '/..' . '/laravel/scout/src/Console/SyncIndexSettingsCommand.php',
+        'Laravel\\Scout\\Contracts\\PaginatesEloquentModels' => __DIR__ . '/..' . '/laravel/scout/src/Contracts/PaginatesEloquentModels.php',
+        'Laravel\\Scout\\Contracts\\PaginatesEloquentModelsUsingDatabase' => __DIR__ . '/..' . '/laravel/scout/src/Contracts/PaginatesEloquentModelsUsingDatabase.php',
+        'Laravel\\Scout\\Contracts\\UpdatesIndexSettings' => __DIR__ . '/..' . '/laravel/scout/src/Contracts/UpdatesIndexSettings.php',
+        'Laravel\\Scout\\EngineManager' => __DIR__ . '/..' . '/laravel/scout/src/EngineManager.php',
+        'Laravel\\Scout\\Engines\\Algolia3Engine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/Algolia3Engine.php',
+        'Laravel\\Scout\\Engines\\Algolia4Engine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/Algolia4Engine.php',
+        'Laravel\\Scout\\Engines\\AlgoliaEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/AlgoliaEngine.php',
+        'Laravel\\Scout\\Engines\\CollectionEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/CollectionEngine.php',
+        'Laravel\\Scout\\Engines\\DatabaseEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/DatabaseEngine.php',
+        'Laravel\\Scout\\Engines\\Engine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/Engine.php',
+        'Laravel\\Scout\\Engines\\MeilisearchEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/MeilisearchEngine.php',
+        'Laravel\\Scout\\Engines\\NullEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/NullEngine.php',
+        'Laravel\\Scout\\Engines\\TypesenseEngine' => __DIR__ . '/..' . '/laravel/scout/src/Engines/TypesenseEngine.php',
+        'Laravel\\Scout\\Events\\ModelsFlushed' => __DIR__ . '/..' . '/laravel/scout/src/Events/ModelsFlushed.php',
+        'Laravel\\Scout\\Events\\ModelsImported' => __DIR__ . '/..' . '/laravel/scout/src/Events/ModelsImported.php',
+        'Laravel\\Scout\\Exceptions\\NotSupportedException' => __DIR__ . '/..' . '/laravel/scout/src/Exceptions/NotSupportedException.php',
+        'Laravel\\Scout\\Exceptions\\ScoutException' => __DIR__ . '/..' . '/laravel/scout/src/Exceptions/ScoutException.php',
+        'Laravel\\Scout\\Jobs\\MakeRangeSearchable' => __DIR__ . '/..' . '/laravel/scout/src/Jobs/MakeRangeSearchable.php',
+        'Laravel\\Scout\\Jobs\\MakeSearchable' => __DIR__ . '/..' . '/laravel/scout/src/Jobs/MakeSearchable.php',
+        'Laravel\\Scout\\Jobs\\RemoveFromSearch' => __DIR__ . '/..' . '/laravel/scout/src/Jobs/RemoveFromSearch.php',
+        'Laravel\\Scout\\Jobs\\RemoveableScoutCollection' => __DIR__ . '/..' . '/laravel/scout/src/Jobs/RemoveableScoutCollection.php',
+        'Laravel\\Scout\\ModelObserver' => __DIR__ . '/..' . '/laravel/scout/src/ModelObserver.php',
+        'Laravel\\Scout\\Scout' => __DIR__ . '/..' . '/laravel/scout/src/Scout.php',
+        'Laravel\\Scout\\ScoutServiceProvider' => __DIR__ . '/..' . '/laravel/scout/src/ScoutServiceProvider.php',
+        'Laravel\\Scout\\Searchable' => __DIR__ . '/..' . '/laravel/scout/src/Searchable.php',
+        'Laravel\\Scout\\SearchableScope' => __DIR__ . '/..' . '/laravel/scout/src/SearchableScope.php',
         'Laravel\\SerializableClosure\\Contracts\\Serializable' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Contracts/Serializable.php',
         'Laravel\\SerializableClosure\\Contracts\\Signer' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Contracts/Signer.php',
         'Laravel\\SerializableClosure\\Exceptions\\InvalidSignatureException' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Exceptions/InvalidSignatureException.php',
