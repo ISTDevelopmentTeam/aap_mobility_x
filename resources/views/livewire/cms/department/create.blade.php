@@ -34,7 +34,7 @@ new class extends Component {
     </button>
 
     <x-modal-box name="CreateModal">
-        <form wire:submit.prevent="store">
+        <form wire:submit.prevent="store" x-data="{ isChecked: false }">
             <fieldset class="fieldset border-base-300 border rounded-box p-4">
                 <legend class="fieldset-legend text-blue-900 text-lg">
                     Add Department
@@ -55,9 +55,10 @@ new class extends Component {
                         @error('department_name') {{ $message }} @enderror
                     </p>
                 </label>
+
          
                 {{-- Action Buttons --}}
-                <div class="flex justify-between mt-2">
+                <div class="flex mt-2" x-bind:class="isChecked ? 'justify-between' : 'justify-end'" >
                     <button type="submit" wire:show="isCreatingAnother" x-on:click="$js.closeCreateModal" class="btn btn-ghost btn-sm">
                             Submit and Close
                     </button>
@@ -76,7 +77,7 @@ new class extends Component {
             </fieldset>
             <div class="mt-3">
                 <label class="label text-xs">
-                    <input wire:model="isCreatingAnother" type="checkbox" class="w-4 h-4 text-blue-900 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                    <input wire:model="isCreatingAnother" x-model="isChecked" type="checkbox" class="w-4 h-4 text-blue-900 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                     Submit and create another
                 </label>
             </div>

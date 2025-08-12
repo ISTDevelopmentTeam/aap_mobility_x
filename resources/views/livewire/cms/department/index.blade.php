@@ -19,10 +19,10 @@
                     ]
                 @endphp
                 @foreach ($submodules as $key => $value)
-                    <div class="flex w-auto {{ request()->is($value)
+                    <div class="flex w-auto {{ request()->routeIs($value)
                     ? 'border-b-2 border-blue-900' : '' }} p-1 text-center">
                         <a href="/cms/{{ $value }}"
-                            class="{{ request()->is($value)
+                            class="{{ request()->routeIs($value)
                             ? 'font-semibold text-blue-900' : 'text-gray-600 hover:text-blue-800 font-inter' }}">
                             {{ $key }}
                         </a>
@@ -57,6 +57,10 @@
                 </div>
 
                 <div class="flex flex-wrap justify-between items-center gap-4 px-0 lg:px-5">
+                    {{-- search --}}
+                    <div>
+                        <livewire:cms.department.components.search />
+                    </div>
                     {{-- CREATE an instance of a model --}}
                     <livewire:cms.department.create />
                 </div>
