@@ -54,8 +54,8 @@
                                 d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <a href="#" class="hover:underline font-semibold "
-                            x-text="editMode ? 'Edit Asset' : 'View Asset'">
+                        <a href="" class="hover:underline font-semibold ">
+                            View Asset
                         </a>
 
                     </div>
@@ -71,7 +71,7 @@
                             <div class="col-span-1 flex items-start ">
 
                                 <!-- SVG Icon based on category_id -->
-                                <div class="flex mr-5 rounded-full p-2 text-[4B5563] bg-[F0EDEB] self-center">
+                                <div class="flex mr-5 rounded-xl p-2 text-blue-800 bg-yellow-400 self-center">
                                     @switch($asset->category_id)
                                     @case(1)
                                     {{-- Icon for IT Equipment --}}

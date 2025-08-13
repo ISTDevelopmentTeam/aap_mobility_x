@@ -6,7 +6,7 @@
                 <div>
                     <h2 class="text-2xl font-bold text-[#071d49] mb-1">Transfer Asset</h2>
                     <p class="text-sm text-gray-600 leading-tight">
-                        <em>Enter transfer information for the selected asset below.</em>
+                        <em>Enter transfer information for the selected asset/s below.</em>
                     </p>
                 </div>
             </div>
@@ -15,10 +15,10 @@
         <!-- Body Content -->
         <div class="flex">
             <!-- Asset Summary Sidebar -->
-            <div class="w-[45%] p-5 border-r border-gray-200 space-y-6">
+            <div class="w-[45%] p-5 border-r border-gray-200 space-y-3">
                 {{-- Assets for Transfer --}}
                 @foreach($assets as $asset)
-                <div class="flex justify-between rounded-lg border border-gray-200 p-3 bg-[#FAFBFF] shadow-xl">
+                <div class="flex justify-between rounded-xl border border-gray-200 p-3 bg-[#FAFBFF] shadow-md">
 
                     <!-- ================= LEFT: ICON + BASIC INFO ================= -->
                     <div class="flex items-start gap-4">
@@ -214,46 +214,58 @@
 
                     <!-- ================= RIGHT: TOGGLE BUTTON + DETAILS ================= -->
                     @if($assets->count() > 1)
-                    <div class="flex flex-row self-center">
+                    <div class="flex flex-row self-center gap-1">
                         <!-- === ACTION BUTTONS === -->
                         <button type="button" wire:key="asset-{{ $asset->asset_id }}"
                             wire:click.prevent="viewDetails({{ (int) $asset->asset_id }})"
-                            class="group flex items-center hover:mr-1 px-2 overflow-hidden w-8 hover:w-28 transition-all duration-500 ease-in-out  rounded-lg text-blue-800 hover:text-white  hover:bg-blue-800">
-                            <div class="flex items-center justify-center w-8 h-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-eye-icon">
+                            class="relative flex items-center justify-center rounded-full text-blue-800 ">
+
+                            <div class="relative group flex items-center justify-center">
+                                <!-- Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="size-4 lucide lucide-eye-icon hover:scale-110 ease-in-out transition duration-300">
                                     <path
                                         d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
                                     <circle cx="12" cy="12" r="3" />
                                 </svg>
-                            </div>
-                            <span
-                                class="whitespace-nowrap pl-1 pr-2 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                                x-text="showDetails ? 'Hide Details' : 'View Details'">
 
-                            </span>
+                                <!-- Tooltip -->
+                                <span
+                                    class="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 bg-black text-white text-xs font-medium py-1 px-2 rounded shadow-lg whitespace-nowrap">
+                                    View Details
+                                </span>
+                            </div>
                         </button>
 
+
                         <button type="button" wire:key="asset-{{ $asset->asset_id }}"
-                            wire:click.prevent="removeAsset({{ (int) $asset->asset_id }})"
-                            class="group flex items-center hover:px-2 overflow-hidden w-8 hover:w-28 transition-all duration-500 ease-in-out  rounded-lg text-red-600 hover:text-white  hover:bg-red-600">
-                            <div class="flex items-center justify-center w-8 h-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
+                            wire:click.prevent="removeAsset({{ (int) $asset->asset_id }})" @disabled($loop->first)
+                            class="relative flex items-center justify-center rounded-full text-red-600
+                            disabled:text-gray-500 disabled:cursor-not-allowed">
+
+                            <div class="relative group flex items-center justify-center">
+                                <!-- Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="size-4 lucide lucide-trash-2 hover:scale-110 ease-in-out transition duration-300">
                                     <path d="M10 11v6" />
                                     <path d="M14 11v6" />
                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
                                     <path d="M3 6h18" />
                                     <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                 </svg>
+
+                                <!-- Tooltip -->
+                                <span
+                                    class="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 bg-black text-white text-xs font-medium py-1 px-2 rounded shadow-lg whitespace-nowrap">
+                                    {{ $loop->first ? 'Unable to remove the originally selected asset' : 'Remove' }}
+                                </span>
                             </div>
-                            <span
-                                class="whitespace-nowrap p-1 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                                Remove
-                            </span>
                         </button>
+
                         <!-- === END ACTION BUTTONS === -->
 
                     </div>
@@ -264,8 +276,8 @@
                 @endforeach
 
                 @if($assets->count() === 1)
-                    <div class="space-y-4">
-                    <div class="rounded-lg border border-gray-200 p-5 bg-[#FAFBFF] shadow-xl">
+                <div class="space-y-4">
+                    <div class="rounded-xl border border-gray-200 p-5 bg-[#FAFBFF] shadow-md">
                         <div>
                             {{-- Header --}}
                             <div class="flex flex-row items-center text-gray-700 mb-2 gap-2">
@@ -379,20 +391,32 @@
                             </ul>
                         </div>
                     </div>
-                    </div>
+                </div>
                 @endif
-                <div class="flex justify-end">
-                    <button type="button" wire:click="openAssetPicker({{ (int) $asset->asset_id }})"
-                        class="flex items-center gap-1 px-2 py-2 text-xs font-medium text-white bg-blue-800 rounded-lg hover:bg-blue-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="size-4 lucide lucide-plus-icon lucide-plus">
-                            <path d="M5 12h14" />
-                            <path d="M12 5v14" />
-                        </svg>
-                        Transfer Multiple Assets
+                <div class="flex justify-end pt-4">
+                    <button type="button" wire:click="openAssetPicker"
+                        class="relative flex items-center gap-1 px-3 py-2 text-sm font-semibold text-blue-950 bg-yellow-400 rounded-lg hover:bg-yellow-500">
+
+                        <div class="relative group flex items-center gap-1">
+                            <!-- Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" class="size-4 lucide lucide-plus">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Add More Assets
+
+                            <!-- Tooltip -->
+                            <span
+                                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 bg-black text-white text-xs font-medium py-1 px-2 rounded shadow-lg whitespace-nowrap">
+                                Add more assets for transfer
+                            </span>
+                        </div>
                     </button>
                 </div>
+
+
             </div>
 
 
@@ -458,48 +482,48 @@
 
                             @if($asset->asset_type == 1)
                             <div x-data="{
-                        openToDept: false,
-                        selectedToDeptId: @entangle('to_department_id'),
-                        selectedToDeptName: @entangle('to_department_name'),
-                        searchDeptText: '',
-                        clearSearchTimeout: null,
+                                openToDept: false,
+                                selectedToDeptId: @entangle('to_department_id'),
+                                selectedToDeptName: @entangle('to_department_name'),
+                                searchDeptText: '',
+                                clearSearchTimeout: null,
 
-                        handleToDeptClick() {
-                        this.openToDept = !this.openToDept;
+                                handleToDeptClick() {
+                                this.openToDept = !this.openToDept;
 
-                        // Focus the hidden input after dropdown opens
-                        this.$nextTick(() => {
-                            if (this.openToDept && this.$refs.toDeptSearch) {
-                                this.$refs.toDeptSearch.focus();
-                            }
-                            });
-                        },
+                                // Focus the hidden input after dropdown opens
+                                this.$nextTick(() => {
+                                    if (this.openToDept && this.$refs.toDeptSearch) {
+                                        this.$refs.toDeptSearch.focus();
+                                    }
+                                    });
+                                },
 
 
-                        handleDeptSearch(value) {
-                            this.searchDeptText = value;
-                            console.log('Searching for department:', value); // ✅ Console log added
-                            this.$wire.set('searchTerm', value);
+                                handleDeptSearch(value) {
+                                    this.searchDeptText = value;
+                                    console.log('Searching for department:', value); // ✅ Console log added
+                                    this.$wire.set('searchTerm', value);
 
-                            if (this.clearSearchTimeout) clearTimeout(this.clearSearchTimeout);
-                            this.clearSearchTimeout = setTimeout(() => {
-                                this.searchDeptText = '';
-                            }, 2000);
+                                    if (this.clearSearchTimeout) clearTimeout(this.clearSearchTimeout);
+                                    this.clearSearchTimeout = setTimeout(() => {
+                                        this.searchDeptText = '';
+                                    }, 2000);
 
-                        },
+                                },
 
-                        resetToDept() {
-                            this.selectedToDeptId = '';
-                            this.selectedToDeptName = '';
-                        }
-                        }" x-init="
-                            $watch('openToDept', value => {
-                                if (!value) {
-                                    searchDeptText = '';
-                                    $wire.set('searchTerm', '');
+                                resetToDept() {
+                                    this.selectedToDeptId = '';
+                                    this.selectedToDeptName = '';
                                 }
-                            });
-                        " class="relative mt-1 w-full">
+                                }" x-init="
+                                    $watch('openToDept', value => {
+                                        if (!value) {
+                                            searchDeptText = '';
+                                            $wire.set('searchTerm', '');
+                                        }
+                                    });
+                                " class="relative mt-1 w-full">
                                 <!-- Toggle -->
                                 <button type="button" @click="handleToDeptClick"
                                     class="

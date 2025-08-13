@@ -50,35 +50,30 @@ class AssetList extends Component
         $assets = Asset::with(['employee', 'category', 'status', 'condition', 'department', 'brand'])
             ->where('ams_active', 1)
 
-            // ✅ Apply Category Filter
             ->when(
                 $this->filterCategory,
                 fn($q) =>
                 $q->where('category_id', $this->filterCategory)
             )
 
-            // ✅ Apply Status Filter
             ->when(
                 $this->filterStatus,
                 fn($q) =>
                 $q->where('status_id', $this->filterStatus)
             )
 
-            // ✅ Apply Condition Filter
             ->when(
                 $this->filterCondition,
                 fn($q) =>
                 $q->where('condition_id', $this->filterCondition)
             )
 
-            // ✅ Apply Department Filter
             ->when(
                 $this->filterDepartment,
                 fn($q) =>
                 $q->where('department_id', $this->filterDepartment)
             )
 
-            // ✅ Apply Search
             ->when($this->search, function ($query) {
                 $term = '%' . $this->search . '%';
                 $lowered = strtolower(trim($this->search));

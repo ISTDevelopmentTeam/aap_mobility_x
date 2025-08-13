@@ -31,6 +31,7 @@ class TransferForm extends Component
     public $to_employee_name;
     public $transfer_reason;
     public $showConfirmModal = false;
+    protected $listeners = ['confirm-selected-transfer' => 'addSelectedAssets'];
 
     public function confirmSubmit()
     {
@@ -42,12 +43,48 @@ class TransferForm extends Component
         $this->submit(); // your existing submit() logic
     }
 
-    public function openAssetPicker($id){
-        $this->dispatch(
-            'open-transfer-list',
-            $id
-        );
+    public function openAssetPicker(): void
+    {
+        $origin = (int) collect($this->assets)
+            ->map(fn($a) => (int) ($a['asset_id'] ?? $a->asset_id ?? 0))
+            ->first();
+
+        if ($origin === 0)
+            return; 
+
+        $preselected = collect($this->assets)
+            ->map(fn($a) => (int) ($a['asset_id'] ?? $a->asset_id ?? 0))
+            ->reject(fn(int $id) => $id === $origin)
+            ->unique()->values()->all();
+
+        $this->dispatch('open-transfer-list', id: $origin, preselected: $preselected);
     }
+
+    public function addSelectedAssets($selectedAssets)
+    {
+        // dump($selectedAssets);
+        // Ensure it's an array
+        if (!is_array($selectedAssets)) {
+            return;
+        }
+
+        // Get current asset IDs already in the $assets collection/array
+        $existingIds = collect($this->assets)->pluck('asset_id')->toArray();
+
+        // Fetch new assets from DB
+        $newAssets = Asset::with(['category', 'employee', 'department', 'brand'])
+            ->whereIn('asset_id', $selectedAssets)
+            ->whereNotIn('asset_id', $existingIds)
+            ->get();
+
+        // Merge into the $assets property
+        if ($this->assets instanceof \Illuminate\Support\Collection) {
+            $this->assets = $this->assets->merge($newAssets);
+        } else {
+            $this->assets = collect($this->assets)->merge($newAssets);
+        }
+    }
+
 
     public function viewDetails($id)
     {
@@ -57,11 +94,12 @@ class TransferForm extends Component
         );
     }
 
-    public function removeAsset($index)
+    public function removeAsset(int $assetId): void
     {
-        if (isset($this->assets[$index])) {
-            unset($this->assets[$index]);
-        }
+        $this->assets = collect($this->assets)
+            ->reject(fn($asset) => (int) ($asset['asset_id'] ?? $asset->asset_id) === $assetId)
+            ->values();
+        $this->dispatch('reset-selected-asset', $assetId);
     }
 
     public function mount()
