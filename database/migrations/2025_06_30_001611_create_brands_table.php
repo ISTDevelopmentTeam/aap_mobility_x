@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('brand_code')->nullable();
             $table->string('brand_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

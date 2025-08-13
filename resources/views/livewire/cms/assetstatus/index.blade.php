@@ -34,7 +34,6 @@
                 @endforeach
             </div>
         </div>
-
-        <livewire:cms.department.list />
+        <livewire:cms.assetstatus.list />
     </div>
 </x-app-layout>

@@ -35,6 +35,6 @@
             </div>
         </div>
 
-        <livewire:cms.department.list />
+        <livewire:cms.assetcategory.list />
     </div>
 </x-app-layout>

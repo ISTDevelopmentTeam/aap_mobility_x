@@ -60,7 +60,7 @@ new class extends Component {
          
                 {{-- Action Buttons --}}
                 <div class="flex justify-end gap-2 mt-2">
-                    <button type="button" x-on:click="$js.closeCreateModal" class="btn btn-outline btn-secondary text-gray-700 hover:text-white btn-sm">
+                    <button type="button" x-on:click="$js.closeEditModal" class="btn btn-outline btn-secondary text-gray-700 hover:text-white btn-sm">
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm">

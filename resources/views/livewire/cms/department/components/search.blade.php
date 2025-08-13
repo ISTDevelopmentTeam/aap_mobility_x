@@ -1,7 +1,7 @@
 <div>
     <div x-data="{ open: false }" class="relative flex flex-1 min-w-0 sm:w-72">
         <div
-            class="flex items-center flex-grow bg-white border border-gray-300 rounded-lg shadow-sm w-full relative">
+            class="flex items-center flex-grow bg-white border border-gray-300 rounded-2xl shadow-sm w-full relative">
 
             <!-- Search Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -14,7 +14,7 @@
 
             <!-- Search Input -->
             <input type="text" placeholder="Search"
-                class="text-sm px-2 py-2 w-full bg-transparent border-white outline-none focus:outline-none focus:ring-0 focus:border-white"
+                class="text-sm h-8 px-2 py-2 w-full bg-transparent border-white outline-none focus:outline-none focus:ring-0 focus:border-white"
                 x-data
                 wire:model.live.debounce.300ms="search">
 

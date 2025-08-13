@@ -99,6 +99,10 @@ Route::middleware('auth')->group(function () {
 
     // Routes for CMS (romuromu)
     Route::view('/cms/departments', 'livewire/cms/department/index')->name('departments');
+    Route::view('/cms/brands', 'livewire/cms/brand/index')->name('brands');
+    Route::view('/cms/asset-categories', 'livewire/cms/assetcategory/index')->name('asset-categories');
+    Route::view('/cms/asset-statuses', 'livewire/cms/assetstatus/index')->name('asset-statuses');
+    Route::view('/cms/asset-conditions', 'livewire/cms/assetcondition/index')->name('asset-conditions');
     Route::redirect('/cms', '/cms/departments');
     
     //Route::view('/ams/cms/departments', 'ams.cms.department.index')->name('department');

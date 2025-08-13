@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('condition_name')->unique();
             $table->text('condition_description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

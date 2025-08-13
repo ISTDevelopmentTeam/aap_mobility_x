@@ -5,12 +5,15 @@ namespace App\Models;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends Model
 {
+    use SoftDeletes;
     protected $primaryKey = 'brand_id';
 
     protected $fillable = [
+        'brand_code',
         'brand_name',
     ];
 

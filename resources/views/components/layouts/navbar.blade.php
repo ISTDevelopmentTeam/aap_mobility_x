@@ -68,7 +68,7 @@ $modules_access = auth()->user()->roles->flatMap->modules->pluck('module_name')-
   <button class="self-end mr-4 text-white lg:hidden" onclick="menuToggle()">✖</button>
   <div class="w-28 flex justify-center">
     <a href="{{ route('dashboard') }}">
-      <img src="{{ asset('storage/'.$user->organization->org_logo) }}" alt="aap-logo" class="max-w-full h-auto" />
+      <img src="{{ asset('aaplogo1.png') }}" alt="aap-logo" class="max-w-full h-auto" />
     </a>
   </div>
   
@@ -115,8 +115,7 @@ $modules_access = auth()->user()->roles->flatMap->modules->pluck('module_name')-
                 <path fill-rule="evenodd" d="M2.25 5.25a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3V15a3 3 0 0 1-3 3h-3v.257c0 .597.237 1.17.659 1.591l.621.622a.75.75 0 0 1-.53 1.28h-9a.75.75 0 0 1-.53-1.28l.621-.622a2.25 2.25 0 0 0 .659-1.59V18h-3a3 3 0 0 1-3-3V5.25Zm1.5 0v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Z" clip-rule="evenodd" />
               @break
               @case('CMS')
-                {{--  MODIFY ICON OF CMS IN SIDEBAR --}}
-                <path fill-rule="evenodd" d="M2.25 5.25a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3V15a3 3 0 0 1-3 3h-3v.257c0 .597.237 1.17.659 1.591l.621.622a.75.75 0 0 1-.53 1.28h-9a.75.75 0 0 1-.53-1.28l.621-.622a2.25 2.25 0 0 0 .659-1.59V18h-3a3 3 0 0 1-3-3V5.25Zm1.5 0v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Z" clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd" />
               @break
             @endswitch
           </svg>
@@ -129,7 +128,7 @@ $modules_access = auth()->user()->roles->flatMap->modules->pluck('module_name')-
   <div class="items-end w-full h-full flex">
             <livewire:clock />
   </div>
-  
+
 
   {{-- <div class="mt-auto w-full px-4 pb-6">
     <div class="flex flex-col gap-4">
