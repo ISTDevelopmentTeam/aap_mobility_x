@@ -35,6 +35,13 @@ class Submodule extends Model
             ->withPivot('role_id');
     }
 
+    public function getSubmodulePermissionName()
+    {
+        $moduleName = $this->module->module_name;
+        $permission = 'access ' . strtolower(str_replace(' ', '_', $this->submodule_name)) . ' of ' . strtolower(str_replace(' ', '_', $moduleName));
+        return $permission;
+    }
+
     public function permissionsForRole($roleId)
     {
         return $this->belongsToMany(Permission::class, 'role_has_submodule_permissions', 'submodule_id', 'permission_id')

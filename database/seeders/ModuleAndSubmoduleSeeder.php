@@ -5,9 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Module;
 use App\Models\Submodule;
+use App\Models\Action;
 use App\Models\CustomPermission as Permission;
 use App\Models\CustomRole as Role;
 use App\Enums\PermissionType;
+use App\Enums\ActionType;
 
 class ModuleAndSubmoduleSeeder extends Seeder
 {
@@ -148,7 +150,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
                 );
 
                 // Create a permission for each submodule
-                $subPermissionName = 'access ' . strtolower(str_replace(' ', '_', $sub['name'])) . ' of ' . strtolower(str_replace(' ', '_', $mod['name']));;
+                $subPermissionName = 'access ' . strtolower(str_replace(' ', '_', $sub['name'])) . ' of ' . strtolower(str_replace(' ', '_', $mod['name']));
                 $permission = Permission::updateOrCreate(
                     ['name' => $subPermissionName, 'permission_type' => PermissionType::SUBMODULE, 'permission_guard_name' => 'web'],
                     [
@@ -159,9 +161,34 @@ class ModuleAndSubmoduleSeeder extends Seeder
                         'permission_date_created' => now(),
                         'permission_date_updated' => now(),
                     ],
-
                 );
                 $allPermissionNames[] = $permission->name;
+
+                foreach(ActionType::values() as $actionType){
+                    $action = Action::updateOrCreate(
+                        ['action_type' => $actionType, 'submodule_id' => $submodule->submodule_id],
+                        [
+                            'action_status' => 1,
+                            'action_created' => now(),
+                            'action_updated' => now(),
+                        ]
+                    );
+
+                    $actionPermissionName = $actionType . ' ' . strtolower(str_replace(' ', '_', $sub['name'])) . ' of ' . strtolower(str_replace(' ', '_', $mod['name']));
+                    $permission = Permission::updateOrCreate(
+                        ['name' => $actionPermissionName, 'permission_type' => PermissionType::ACTION, 'permission_guard_name' => 'web'],
+                        [
+                            'module_id' => $module->module_id,
+                            'submodule_id' => $submodule->submodule_id,
+                            'action_id' => $action->action_id,
+                            'permission_description' => $actionType . $sub['name'],
+                            'permission_status' => 1,
+                            'permission_date_created' => now(),
+                            'permission_date_updated' => now(),
+                        ],
+                    );
+                    $allPermissionNames[] = $permission->name;
+                }
             }
         }
 

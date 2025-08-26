@@ -137,7 +137,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        $all_modules = Module::all();
+        $modules = Module::all();
         $submodules = Submodule::get();
         $permissions = Permission::all();
         $organizations = Organization::all();
@@ -195,7 +195,7 @@ class RoleController extends Controller
 
         // }
 
-        return view('role-permission.role.edit', compact('role', 'selected_role', 'permissions', 'all_modules', 'organizations' ));
+        return view('role-permission.role.edit', compact('role', 'selected_role', 'permissions', 'modules', 'organizations' ));
 
     }
 

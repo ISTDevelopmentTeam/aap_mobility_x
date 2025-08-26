@@ -37,7 +37,7 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         return view('role-permission.permission.edit', [
-            'permission' => $permission
+            'permission' => $permission,
         ]);
     }
 

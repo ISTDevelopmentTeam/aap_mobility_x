@@ -147,9 +147,9 @@
                         <p class="text-sm italic text-gray-600">Grant specific access and permissions to roles by assigning relevant modules and their associated submodules.</p>
                     </div>
                     <div class="col-span-6">
-                        @if ($selected_role->prepared_modules)
+                        <div>Hello</div>
                             <div class="flex flex-col gap-4">
-                                @foreach ($all_modules as $module)
+                                @foreach ($modules as $module)
                                     <div
                                         class="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-5 text-sm shadow-sm">
                                         <div class="flex space-x-2">
@@ -158,8 +158,8 @@
                                                 name="module_id[]" value="{{ $module->module_id }}"
                                                 data-module-id="{{ $module->module_id }}"
                                                 id="module_{{ $module->module_id }}"
-                                                {{ in_array($module['module_id'], array_column($selected_role->prepared_modules, 'module_id')) ? 'checked' : '' }}>
-
+                                                {{ auth()->user()->can($module->getModulePermissionName()) ? 'checked' : '' }}
+                                            >
                                             <div class="flex flex-col text-start">
                                                 <label for="module_{{ $module->module_id }}"
                                                     class="font-medium text-blue-900">
@@ -183,20 +183,15 @@
                                                             data-module-id="{{ $module->module_id }}"
                                                             data-submodule-id="{{ $submodule->submodule_id }}"
                                                             id="submodule_{{ $submodule->submodule_id }}"
-                                                            {{ !empty(
-                                                                collect(
-                                                                    collect($selected_role->prepared_modules)->firstWhere('module_id', $module->module_id)['submodules'] ?? [],
-                                                                )->firstWhere('submodule_id', $submodule->submodule_id)['permissions'] ?? []
-                                                            )
-                                                                ? 'checked'
-                                                                : '' }}>
+                                                            {{ auth()->user()->can($submodule->getSubmodulePermissionName()) ? 'checked' : '' }}
+                                                        >
                                                         <label for="submodule_{{ $submodule->submodule_id }}"
                                                             class="text-gray-700">
                                                             {{ $submodule->submodule_name }}
                                                         </label>
                                                     </div>
 
-                                                    <div class="flex gap-4">
+                                                    {{-- <div class="flex gap-4">
                                                         @foreach ($permissions as $permission)
                                                             <div class="flex items-center gap-2">
                                                                 <input type="checkbox"
@@ -216,14 +211,13 @@
                                                                 </label>
                                                             </div>
                                                         @endforeach
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             @endforeach
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
-                        @endif
 
 
                     </div>
