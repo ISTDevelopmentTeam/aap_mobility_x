@@ -31,5 +31,4 @@
                 w-[50%] lg:w-[55%] border-2 p-1.5 px-4 py-2 text-sm text-center rounded-lg font-inter font-medium truncate">Send To All Via Mobile No.</a>
         </div>
     </div>  
-
 </div>
