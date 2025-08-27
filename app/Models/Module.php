@@ -33,14 +33,4 @@ class Module extends Model
     {
         return $this->hasOne(Permission::class, 'module_id');
     }
-
-    public function organization()
-    {
-        return $this->belongsToMany(Organization::class, 'org_id');
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_has_modules', 'module_id', 'role_id');
-    }
 }

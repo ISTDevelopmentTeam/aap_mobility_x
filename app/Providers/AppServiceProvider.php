@@ -32,5 +32,26 @@ class AppServiceProvider extends ServiceProvider
 
             return $user->can($module->getModulePermissionName());
         });
+
+
+        Blade::if('canAccessSubmodule', function ($submodule) {
+            $user = auth()->user();
+
+            if(!$user || !$submodule) {
+                return false;
+            }
+            
+            return $user->can($submodule->getSubmodulePermissionName());
+        });
+
+        Blade::if('canDoAction', function ($action) {
+            $user = auth()->user();
+
+            if (!$user || !$action) {
+                return false;
+            }
+
+            return $user->can($action->getModulePermissionName());
+        });
     }
 }

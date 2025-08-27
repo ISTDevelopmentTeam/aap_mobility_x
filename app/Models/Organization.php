@@ -17,10 +17,10 @@ class Organization extends Model
         'org_color',
     ];
 
-    // public function roles()
-    // {
-    //     return $this->hasMany(Role::class, 'org_id'); // Ensure 'org_id' matches the column in roles table
-    // }
+    public function roles()
+    {
+        return $this->hasMany(Role::class, 'org_id'); // Ensure 'org_id' matches the column in roles table
+    }
 
     public function users()
     {

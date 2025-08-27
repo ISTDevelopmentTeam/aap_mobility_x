@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             // independent migrations
             AssetCategorySeeder::class,
             AssetStatusSeeder::class,
+            AssetConditionSeeder::class,
             BranchSeeder::class,
             BrandSeeder::class,
             CandidateSeeder::class,
@@ -24,17 +25,8 @@ class DatabaseSeeder extends Seeder
             // dependent migration
             EmployeeSeeder::class,
             AssetSeeder::class,
-
-            // InitialSeeder::class,
+            
             SuperAdminSeeder::class,
-
-            // RolePermissionUserSeeder::class,
-            checkRBACSeeder::class,
-            checkSpatieAssignments::class,
-            checkSpatieImplementation::class,
-            AssetConditionSeeder::class,
-
-            // TODO: WIP, coupled to 'superadmin' entry, then uses syncPermission so treat it as last seeder
             ModuleAndSubmoduleSeeder::class,
         ]);
     }

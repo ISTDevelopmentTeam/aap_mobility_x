@@ -21,7 +21,13 @@ class CustomRole extends Model implements RoleContract
 
     protected $table = 'roles';
     protected $primaryKey = 'role_id';
-    protected $fillable = ['role_name', 'role_guard_name'];
+    protected $fillable = [
+        'role_name', 
+        'role_description',
+        'role_guard_name',
+        'role_status',
+        'org_id',
+    ];
     public $timestamps = true;
 
     public function __construct(array $attributes = [])

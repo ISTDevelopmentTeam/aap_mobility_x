@@ -23,21 +23,20 @@ class Submodule extends Model
         return $this->belongsTo(Module::class, 'module_id');
     }
 
-    public function role()
+    public function actions()
     {
-        return $this->belongsToMany(Role::class, 'role_has_submodule_permissions', 'submodule_id', 'role_id')
-            ->withPivot('permission_id');
+        return $this->hasMany(Action::class, 'submodule_id');
     }
 
     public function permission()
     {
-        return $this->belongsToMany(Permission::class, 'role_has_submodule_permissions', 'submodule_id', 'permission_id')
-            ->withPivot('role_id');
+        return $this->hasOne(Permission::class, 'submodule_id');
     }
 
-    public function permissionsForRole($roleId)
+    public function getSubmodulePermissionName()
     {
-        return $this->belongsToMany(Permission::class, 'role_has_submodule_permissions', 'submodule_id', 'permission_id')
-        ->where('role_has_submodule_permissions.role_id', $roleId);
+        $moduleName = $this->module->module_name;
+        $permission = 'access ' . strtolower(str_replace(' ', '_', $this->submodule_name)) . ' of ' . strtolower(str_replace(' ', '_', $moduleName));
+        return $permission;
     }
 }
