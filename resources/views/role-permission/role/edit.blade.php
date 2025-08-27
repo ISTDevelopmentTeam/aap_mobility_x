@@ -147,7 +147,6 @@
                         <p class="text-sm italic text-gray-600">Grant specific access and permissions to roles by assigning relevant modules and their associated submodules.</p>
                     </div>
                     <div class="col-span-6">
-                        <div>Hello</div>
                             <div class="flex flex-col gap-4">
                                 @foreach ($modules as $module)
                                     <div
@@ -155,8 +154,9 @@
                                         <div class="flex space-x-2">
                                             <input type="checkbox"
                                                 class="module-checkbox rounded border border-gray-400"
-                                                name="module_id[]" value="{{ $module->module_id }}"
-                                                data-module-id="{{ $module->module_id }}"
+                                                name="permissions[]" 
+                                                value="{{ $module->permission->permission_id }}"
+                                                {{-- data-module-id="{{ $module->module_id }}" --}}
                                                 id="module_{{ $module->module_id }}"
                                                 {{ auth()->user()->can($module->getModulePermissionName()) ? 'checked' : '' }}
                                             >
@@ -178,10 +178,10 @@
                                                     <div class="flex items-center gap-3">
                                                         <input type="checkbox"
                                                             class="submodule-checkbox w-4 h-4 rounded border-gray-400"
-                                                            name="submodule_id[]"
-                                                            value="{{ $submodule->submodule_id }}"
-                                                            data-module-id="{{ $module->module_id }}"
-                                                            data-submodule-id="{{ $submodule->submodule_id }}"
+                                                            name="permissions[]"
+                                                            value="{{ $submodule->permission->permission_id }}"
+                                                            {{-- data-module-id="{{ $module->module_id }}"
+                                                            data-submodule-id="{{ $submodule->submodule_id }}" --}}
                                                             id="submodule_{{ $submodule->submodule_id }}"
                                                             {{ auth()->user()->can($submodule->getSubmodulePermissionName()) ? 'checked' : '' }}
                                                         >
@@ -191,35 +191,29 @@
                                                         </label>
                                                     </div>
 
-                                                    {{-- <div class="flex gap-4">
-                                                        @foreach ($permissions as $permission)
+                                                    <div class="flex gap-4">
+                                                        @foreach ($submodule->actions as $action)
                                                             <div class="flex items-center gap-2">
                                                                 <input type="checkbox"
-                                                                    name="permission_id[{{ $submodule->submodule_id }}][]"
-                                                                    value="{{ $permission->permission_id }}"
+                                                                    name="permissions[]"
+                                                                    value="{{ $action->permission->permission_id }}"
                                                                     class="permission-checkbox w-4 h-4 rounded border-gray-400"
-                                                                    data-module-id="{{ $module->module_id }}"
-                                                                    data-submodule-id="{{ $submodule->submodule_id }}"
-                                                                    id="permission_{{ $permission->permission_id }}"
-                                                                    {{ collect($selected_role->prepared_modules)->flatMap(fn($module) => $module['submodules'] ?? [])->filter(fn($s) => $s['submodule_id'] === $submodule->submodule_id)->flatMap(fn($s) => $s['permissions'] ?? [])->pluck('permission_id')->contains($permission->permission_id)
-                                                                        ? 'checked'
-                                                                        : '' }}>
+                                                                    id="action_{{ $action->action_id }}"
+                                                                    {{ auth()->user()->can($action->getActionPermissionName()) ? 'checked' : '' }}>
                                                                 <label
-                                                                    for="permission_{{ $permission->permission_id }}"
+                                                                    for="action_{{ $action->action_id }}"
                                                                     class="text-gray-700">
-                                                                    {{ $permission->permission_name }}
+                                                                    {{ $action->action_name }}
                                                                 </label>
                                                             </div>
                                                         @endforeach
-                                                    </div> --}}
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
-
-
                     </div>
                 </div>
 

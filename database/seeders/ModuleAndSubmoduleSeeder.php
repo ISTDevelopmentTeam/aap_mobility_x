@@ -9,7 +9,7 @@ use App\Models\Action;
 use App\Models\CustomPermission as Permission;
 use App\Models\CustomRole as Role;
 use App\Enums\PermissionType;
-use App\Enums\ActionType;
+use App\Enums\ActionName;
 
 class ModuleAndSubmoduleSeeder extends Seeder
 {
@@ -164,9 +164,9 @@ class ModuleAndSubmoduleSeeder extends Seeder
                 );
                 $allPermissionNames[] = $permission->name;
 
-                foreach(ActionType::values() as $actionType){
+                foreach(ActionName::values() as $actionName){
                     $action = Action::updateOrCreate(
-                        ['action_type' => $actionType, 'submodule_id' => $submodule->submodule_id],
+                        ['action_name' => $actionName, 'submodule_id' => $submodule->submodule_id],
                         [
                             'action_status' => 1,
                             'action_created' => now(),
@@ -174,14 +174,14 @@ class ModuleAndSubmoduleSeeder extends Seeder
                         ]
                     );
 
-                    $actionPermissionName = $actionType . ' ' . strtolower(str_replace(' ', '_', $sub['name'])) . ' of ' . strtolower(str_replace(' ', '_', $mod['name']));
+                    $actionPermissionName = $actionName . ' ' . strtolower(str_replace(' ', '_', $sub['name'])) . ' of ' . strtolower(str_replace(' ', '_', $mod['name']));
                     $permission = Permission::updateOrCreate(
                         ['name' => $actionPermissionName, 'permission_type' => PermissionType::ACTION, 'permission_guard_name' => 'web'],
                         [
                             'module_id' => $module->module_id,
                             'submodule_id' => $submodule->submodule_id,
                             'action_id' => $action->action_id,
-                            'permission_description' => $actionType . $sub['name'],
+                            'permission_description' => $actionName . ' ' . $sub['name'] . ' of ' . $mod['name'],
                             'permission_status' => 1,
                             'permission_date_created' => now(),
                             'permission_date_updated' => now(),

@@ -136,64 +136,66 @@
 
                 <hr class="border-gray-200">
 
-                {{-- Username --}}
+                {{-- Assign Permissions --}}
                 <div class="grid lg:grid-cols-10 items-start gap-10">
                     <div class="col-span-4">
                         <h1 class="font-medium text-blue-900">Assign Module Access and Permission</h1>
                         <p class="text-sm italic text-gray-600">Grant specific access and permissions to roles by assigning relevant modules and their associated submodules.</p>
                     </div>
                     <div class="col-span-6">
-                        @if ($modules)
-                            <div class="flex flex-col gap-4">
-                                @foreach ($modules as $module)
-                                    <div
-                                        class="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-5 text-sm shadow-sm">
-                                        <div class="flex space-x-2">
-                                            <div>
-                                                <input type="checkbox"
-                                                    class="module-checkbox rounded border border-gray-400"
-                                                    name="module_id[]" value="{{ $module->module_id }}"
-                                                    data-module-id="{{ $module->module_id }}"
-                                                    id="module_{{ $module->module_id }}">
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <label for="module_{{ $module->module_id }}"
-                                                    class="font-medium text-blue-900">
-                                                    {{ $module->module_name }}
-                                                </label>
-                                                <p class="text-gray-500 italic">
-                                                    {{ $module->module_description }}
-                                                </p>
-                                            </div>
+                        <div class="flex flex-col gap-4">
+                            @foreach ($modules as $module)
+                                <div
+                                    class="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-5 text-sm shadow-sm">
+                                    <div class="flex space-x-2">
+                                        <input type="checkbox"
+                                            class="module-checkbox rounded border border-gray-400"
+                                            name="permissions[]" 
+                                            value="{{ $module->permission->permission_id }}"
+                                            id="module_{{ $module->module_id }}"
+                                        >
+                                        <div class="flex flex-col text-start">
+                                            <label for="module_{{ $module->module_id }}"
+                                                class="font-medium text-blue-900">
+                                                {{ $module->module_name }}
+                                            </label>
+                                            <p class="text-gray-500 italic">
+                                                {{ $module->module_description ?? 'No description available' }}
+                                            </p>
                                         </div>
+                                    </div>
 
+                                    <div class="mt-3 space-y-2">
                                         @foreach ($module->submodules as $submodule)
-                                            <div class="ml-5 flex justify-between rounded bg-gray-100 p-3">
-                                                <div class="flex items-center gap-2">
+                                            <div
+                                                class="flex justify-between items-center bg-gray-100  rounded-lg p-3">
+                                                <div class="flex items-center gap-3">
                                                     <input type="checkbox"
-                                                        class="submodule-checkbox rounded border border-gray-400"
-                                                        name="submodule_id[]" value="{{ $submodule->submodule_id }}"
-                                                        data-module-id="{{ $module->module_id }}"
-                                                        data-submodule-id="{{ $submodule->submodule_id }}"
-                                                        id="submodule_{{ $submodule->submodule_id }}">
-                                                    <label class="text-gray-700"
-                                                        for="submodule_{{ $submodule->submodule_id }}">
+                                                        class="submodule-checkbox w-4 h-4 rounded border-gray-400"
+                                                        name="permissions[]"
+                                                        value="{{ $submodule->permission->permission_id }}"
+                                                        id="submodule_{{ $submodule->submodule_id }}"
+                                                    >
+                                                    <label for="submodule_{{ $submodule->submodule_id }}"
+                                                        class="text-gray-700">
                                                         {{ $submodule->submodule_name }}
                                                     </label>
                                                 </div>
+
                                                 <div class="flex gap-4">
-                                                    @foreach ($permissions as $permission)
+                                                    @foreach ($submodule->actions as $action)
                                                         <div class="flex items-center gap-2">
                                                             <input type="checkbox"
-                                                                name="permission_id[{{ $submodule->submodule_id }}][]"
-                                                                value="{{ $permission->permission_id }}"
-                                                                class="permission-checkbox rounded border border-gray-400"
-                                                                data-module-id="{{ $module->module_id }}"
-                                                                data-submodule-id="{{ $submodule->submodule_id }}"
-                                                                id="permission_{{ $permission->permission_id }}">
-                                                            <label class="text-gray-700"
-                                                                for="permission_{{ $permission->permission_id }}">
-                                                                {{ $permission->permission_name }}
+                                                                name="permissions[]"
+                                                                value="{{ $action->permission->permission_id }}"
+                                                                class="permission-checkbox w-4 h-4 rounded border-gray-400"
+                                                                id="action_{{ $action->action_id }}"
+                                                            >
+                                                            <label
+                                                                for="action_{{ $action->action_id }}"
+                                                                class="text-gray-700"
+                                                            >
+                                                                {{ $action->action_name }}
                                                             </label>
                                                         </div>
                                                     @endforeach
@@ -201,14 +203,66 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                        @endif
-
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 
+<div class="grid lg:grid-cols-10 items-center gap-10">
+                    <div class="col-span-4">
+                        <div class="flex gap-2 items-center">
+                            <h1 class="font-medium text-blue-900">Set Status</h1>
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4 text-blue-900">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" />
+                            </svg> --}}
+                        </div>
+                        <p class="text-sm italic text-gray-600">
+                            Set the role as active or inactive.
+                        </p>
+                    </div>
 
+                {{-- Set Status --}}
+                <div class="col-span-6">
+                    <div class="">
+                        <div class="flex flex-col justify-center gap-2">
+                            <label for="role_status" class="text-sm font-medium text-blue-900">Status</label>
+                            <div class="flex items-center gap-1">
+                                <label class="inline-flex items-center cursor-pointer">
+                                    <!-- Hidden input to send '0' if checkbox is unchecked -->
+                                    <input type="hidden" name="role_status" value="0">
+                                    <input type="checkbox" name="role_status" id="role_status"
+                                        class="sr-only peer toggle-checkbox"
+                                        value="1"
+                                        checked
+                                    >
+                                    <div
+                                        class="relative w-16 h-8 bg-red-500 rounded-full 
+                                                dark:bg-gray-700 
+                                                peer 
+                                                peer-checked:bg-green-600 
+                                                dark:peer-checked:bg-green-600 
+                                                peer-checked:after:translate-x-8 
+                                                after:content-[''] 
+                                                after:absolute 
+                                                after:top-1 
+                                                after:start-[4px] 
+                                                after:w-6 
+                                                after:h-6 
+                                                after:bg-white 
+                                                after:border 
+                                                after:border-gray-100 
+                                                after:rounded-full">
+                                    </div>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                </div>
                 {{-- Button --}}
                 <div class="grid lg:grid-cols-10 items-center pt-8 gap-10">
                     <div class="col-span-4">
@@ -223,8 +277,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </form>
 
 

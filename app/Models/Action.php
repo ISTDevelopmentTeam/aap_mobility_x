@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CustomPermission as Permission;
 
 class Action extends Model
 {
@@ -12,18 +13,25 @@ class Action extends Model
         'action_name',
         'action_description',
         'action_status',
+        'action_created',
+        'action_updated',
         'submodule_id',
     ];
 
     // Belongs to a Module
     public function submodule()
     {
-        return $this->belongsTo(Module::class, 'module_id');
+        return $this->belongsTo(Submodule::class, 'submodule_id');
     }
 
-    public function getActionPermissionName($actionType)
+    public function permission()
     {
-        $permission = $actionType . ' ' . strtolower(str_replace(' ', '_', $this->submodule->submodule_name)) . ' of ' . strtolower(str_replace(' ', '_', $this->submodule->module->module_name));
+        return $this->hasOne(Permission::class, 'action_id');
+    }
+
+    public function getActionPermissionName()
+    {
+        $permission = $this->action_name . ' ' . strtolower(str_replace(' ', '_', $this->submodule->submodule_name)) . ' of ' . strtolower(str_replace(' ', '_', $this->submodule->module->module_name));
         return $permission;
     }
 }
