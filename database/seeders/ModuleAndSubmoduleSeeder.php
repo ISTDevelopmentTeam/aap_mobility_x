@@ -42,9 +42,10 @@ class ModuleAndSubmoduleSeeder extends Seeder
          * [
          *      'name' =>  {moduleName},
          *      'description' => {moduleDescription},
+         *      'route_name' => {moduleRouteName},
          *      'submodules' => [
-         *          ['name' =>  {submoduleName1}, 'description' => {submoduleDescription1} ],
-         *          ['name' =>  {submoduleName2}, 'description' => {submoduleDescription2} ],
+         *          ['name' =>  {submoduleName1}, 'description' => {submoduleDescription1}, 'route_name' => {submoduleRouteName1}],
+         *          ['name' =>  {submoduleName2}, 'description' => {submoduleDescription2},  'route_name' => {submoduleRouteName2}],
          *          (add submodules as needed)
          *      ],
          * ]
@@ -55,6 +56,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'Dashboard',
                 'description' => 'Main dashboard module',
+                'route_name' => 'dashboard',
                 'submodules' => [
                     ['name' => 'User Analytics', 'description' => 'View user analytics' ],
                 ],
@@ -62,6 +64,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'RBAC Management',
                 'description' => 'Manage roles, permissions, and user access',
+                'route_name' => 'user.index',
                 'submodules' => [
 
                 ],
@@ -69,6 +72,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'Employee Management',
                 'description' => 'Manage employee profiles and records',
+                'route_name' => 'employee.index',
                 'submodules' => [
                     ['name' => 'Alphalist', 'description' => 'Alphalist'],
                     ['name' => 'Manpower Requisition', 'description' => 'Manpower Requisition'],
@@ -78,6 +82,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'CRM',
                 'description' => 'Manage interactions with leads, customers, and partners',
+                'route_name' => 'customer.index',
                 'submodules' => [
                     ['name' => 'Dashboard', 'description' => 'Dashboard'],
                     ['name' => 'Members', 'description' => 'Members'],
@@ -89,8 +94,9 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'Asset Management',
                 'description' => 'Tracks the lifecycle, status, and location of physical and digital assets',
+                'route_name' => 'ams.dashboard',
                 'submodules' => [
-                    ['name' => 'Dashboard', 'description' => 'Dashboard'],
+                    ['name' => 'Dashboard', 'description' => 'Dashboard', ],
                     ['name' => 'Assets', 'description' => 'Assets'],
                     ['name' => 'Scan QR', 'description' => 'Scan QR'],
                 ],
@@ -98,8 +104,13 @@ class ModuleAndSubmoduleSeeder extends Seeder
             [
                 'name' => 'CMS',
                 'description' => 'Create, manage, and publish contents for the system',
+                'route_name' => 'cms',
                 'submodules' => [
-
+                    ['name' => 'Asset Categories', 'description' => 'Asset Categories of CMS', 'route_name' => 'cms.asset-categories'],
+                    ['name' => 'Asset Conditions', 'description' => 'Asset Conditions of CMS', 'route_name' => 'cms.asset-conditions'],
+                    ['name' => 'Asset Status', 'description' => 'Asset Status of CMS', 'route_name' => 'cms.asset-statuses'],
+                    ['name' => 'Departments', 'description' => 'Departments of CMS', 'route_name' => 'cms.departments'],
+                    ['name' => 'IT Brands', 'description' => 'IT Brands of CMS', 'route_name' => 'cms.it-brands'],
                 ],
             ],
         ];
@@ -114,6 +125,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
                 ['module_name' => $mod['name']],
                 [
                     'module_description' => $mod['description'],
+                    'module_route_name' => $mod['route_name'] ?? null,
                     'module_status' => 1,
                     'module_created' => now(),
                     'module_updated' => now(),
@@ -142,6 +154,7 @@ class ModuleAndSubmoduleSeeder extends Seeder
                     ['submodule_name' => $sub['name'], 'module_id' => $module->module_id],
                     [
                         'submodule_description' => $sub['description'],
+                        'submodule_route_name' => $sub['route_name'] ?? null,
                         'module_id' => $module->module_id,
                         'submodule_status' => 1,
                         'submodule_created' => now(),

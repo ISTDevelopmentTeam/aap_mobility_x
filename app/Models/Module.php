@@ -13,6 +13,7 @@ class Module extends Model
     protected $primaryKey = 'module_id';
     protected $fillable = [
         'module_name',
+        'module_route_name',
         'module_description',
         'module_status',
     ];

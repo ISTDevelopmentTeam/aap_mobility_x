@@ -6,30 +6,25 @@ use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 use App\Models\Module;
-use Illuminate\Support\Facades\Auth;
 
-
-class Sidebar extends Component
+class NavigationBar extends Component
 {
     /**
      * Create a new component instance.
      */
-    // public $module;
-    public $user;
-    public $modules;
-    public $currentModule;
 
+    public $currentModule;
+    
     public function __construct($module)
     {
         $this->currentModule = Module::where('module_name', $module)->firstOrFail();
-        $this->modules = Module::all();
-        $this->user = Auth::user();
     }
+
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.layouts.sidebar');
+        return view('components.layouts.navigation-bar');
     }
 }

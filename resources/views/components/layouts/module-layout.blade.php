@@ -1,4 +1,4 @@
-@props(['class' => '', 'x_data' => '', 'navbar_selected' => ''])
+@props(['module'])
 
 <!DOCTYPE html>
 {{-- The color design so far is "light themed", 
@@ -40,15 +40,18 @@
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     </head>
 
-    <body class="{{ $class }}" x-data='@json($x_data)'>
-        <x-navbar :$navbar_selected />
+    {{-- <body class="{{ $class }}" x-data='@json($x_data)'> --}}
+    <body>
+        <x-sidebar :$module />
         <div class="flex flex-col w-full gap-5 bg-[#f3f4f6] xs:w-full sm:w-full">
-            <x-layouts.header />
-            {{ $slot }}
+            <x-layouts.header/>
+            
+            <div class="flex flex-1 flex-col lg:ml-52 mt-12 overflow-y-auto py-10 px-5 lg:p-10 gap-7 bg-[#f3f4f6]">
+                <x-navigation-bar :$module />
+                
+                {{ $slot }}  
+            </div>          
         </div>
-        {{-- For TOAST --}}
-        <div id="toast-container"></div>
-        {{-- <x-layouts.chat /> --}}
         @livewireScripts
     </body>
 </html>

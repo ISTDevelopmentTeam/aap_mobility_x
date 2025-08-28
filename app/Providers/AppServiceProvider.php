@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Submodule;
 use Livewire\Livewire;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        Blade::if('canAccessSubmodule', function ($submodule) {
+        Blade::if('canAccessSubmodule', function ($submodule = null) {
             $user = auth()->user();
 
             if(!$user || !$submodule) {
@@ -44,14 +45,21 @@ class AppServiceProvider extends ServiceProvider
             return $user->can($submodule->getSubmodulePermissionName());
         });
 
-        Blade::if('canDoAction', function ($action) {
+        Blade::if('canDoAction', function ($actionName, $submoduleName) {
+            $submodule = Submodule::where('submodule_name', $submoduleName)->first();
+
+            if(! $submodule){
+                return false;
+            }
+
             $user = auth()->user();
+            $action = $submodule->actions->where('action_name', $actionName)->first();
 
             if (!$user || !$action) {
                 return false;
             }
-
-            return $user->can($action->getModulePermissionName());
+ 
+            return $user->can($action->getActionPermissionName());
         });
     }
 }

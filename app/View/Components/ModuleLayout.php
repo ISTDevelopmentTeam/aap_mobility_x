@@ -13,11 +13,9 @@ class ModuleLayout extends Component
      * Create a new component instance.
      */
 
-    public $module;
-
-    public function __construct(Module $module)
+    public function __construct()
     {
-        $this->module = $module;
+        
     }
 
     /**
