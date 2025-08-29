@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('module_id')->nullable();
             $table->string('submodule_name');
             $table->string('submodule_route_name')->nullable();
+            $table->string('submodule_group')->nullable();
             $table->text('submodule_description')->nullable();
             $table->boolean('submodule_status')->default(1);
             $table->timestamp('submodule_created')->useCurrent();

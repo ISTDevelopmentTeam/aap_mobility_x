@@ -44,8 +44,8 @@ class ModuleAndSubmoduleSeeder extends Seeder
          *      'description' => {moduleDescription},
          *      'route_name' => {moduleRouteName},
          *      'submodules' => [
-         *          ['name' =>  {submoduleName1}, 'description' => {submoduleDescription1}, 'route_name' => {submoduleRouteName1}],
-         *          ['name' =>  {submoduleName2}, 'description' => {submoduleDescription2},  'route_name' => {submoduleRouteName2}],
+         *          ['name' =>  {submoduleName1}, 'description' => {submoduleDescription1}, 'route_name' => {submoduleRouteName1}, 'group' => {submoduleGroup1}],
+         *          ['name' =>  {submoduleName2}, 'description' => {submoduleDescription2},  'route_name' => {submoduleRouteName2}, 'group' => {submoduleGroup2}],
          *          (add submodules as needed)
          *      ],
          * ]

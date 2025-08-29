@@ -14,12 +14,6 @@
         "Dashboard", "Assets", "Scan QR",
     ];
 
-    use App\Models\Module;
-    use App\Models\Submodule;
-
-    // $currentModule = Module::where('module_name', 'Asset Management')->firstOrFail();
-    // // submodulePermissions = auth()->user()->getSubmoduleAccessPermissions($currentModule->module_id);
-    // $submodules = $currentModule->submodules;
 
     $links = [
         'Dashboard' => '/ams',

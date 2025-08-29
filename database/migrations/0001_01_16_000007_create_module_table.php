@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id('module_id');
-            $table->string('module_name');
+            $table->string('module_name')->unique();
             $table->string('module_route_name')->nullable();
             $table->text('module_description')->nullable();
             $table->boolean('module_status')->default(1);

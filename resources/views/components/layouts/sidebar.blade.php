@@ -68,20 +68,6 @@
   </div>
 
   <div class="w-full text-xs">
-    @php
-        $links = [
-          'Dashboard' => '/dashboard',
-          'Roles Management' => '/role',
-          'RBAC Management' => '/user',
-          'Modules' => '/module',
-          'Employee Management' => '/employee',
-          'Permissions' => '/permission',
-          'CRM' => '/customer',
-          'Asset Management' => '/ams',
-          'CMS' => '/cms',
-        ];
-    @endphp
-
     @foreach($modules as $module)
       @canAccessModule($module)
         <div class="group cursor-pointer flex items-center px-2 py-3 gap-2 ml-2 rounded-l-xl {{ $module->module_name === $currentModule->module_name ? 'bg-[#F3F4F6] text-blue-900 font-medium rounded-1 back' : 'hover:text-[#F6D400]' }}">

@@ -158,7 +158,7 @@
                                                 value="{{ $module->permission->permission_id }}"
                                                 {{-- data-module-id="{{ $module->module_id }}" --}}
                                                 id="module_{{ $module->module_id }}"
-                                                {{ auth()->user()->can($module->getModulePermissionName()) ? 'checked' : '' }}
+                                                {{ $selectedRole->hasPermissionTo($module->getModulePermissionName()) ? 'checked' : '' }}
                                             >
                                             <div class="flex flex-col text-start">
                                                 <label for="module_{{ $module->module_id }}"
@@ -183,7 +183,7 @@
                                                             {{-- data-module-id="{{ $module->module_id }}"
                                                             data-submodule-id="{{ $submodule->submodule_id }}" --}}
                                                             id="submodule_{{ $submodule->submodule_id }}"
-                                                            {{ auth()->user()->can($submodule->getSubmodulePermissionName()) ? 'checked' : '' }}
+                                                            {{ $selectedRole->hasPermissionTo($submodule->getSubmodulePermissionName()) ? 'checked' : '' }}
                                                         >
                                                         <label for="submodule_{{ $submodule->submodule_id }}"
                                                             class="text-gray-700">
@@ -199,7 +199,7 @@
                                                                     value="{{ $action->permission->permission_id }}"
                                                                     class="permission-checkbox w-4 h-4 rounded border-gray-400"
                                                                     id="action_{{ $action->action_id }}"
-                                                                    {{ auth()->user()->can($action->getActionPermissionName()) ? 'checked' : '' }}>
+                                                                    {{ $selectedRole->hasPermissionTo($action->getActionPermissionName()) ? 'checked' : '' }}>
                                                                 <label
                                                                     for="action_{{ $action->action_id }}"
                                                                     class="text-gray-700">

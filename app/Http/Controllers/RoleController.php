@@ -63,9 +63,9 @@ class RoleController extends Controller
     {
         $modules = Module::all();
         $organizations = Organization::all();
-        $selected_role = Role::find($role->role_id);
+        $selectedRole = $role;
 
-        return view('role-permission.role.edit', compact('role', 'modules', 'organizations' ));
+        return view('role-permission.role.edit', compact('role', 'modules', 'organizations', 'selectedRole' ));
     }
 
     public function update(Request $request, Role $role)

@@ -4,6 +4,7 @@ use Livewire\WithPagination;
 use Livewire\Volt\Component;
 use App\Models\Department;
 use Livewire\Attributes\{Layout, On};
+use App\Enums\ActionName;
 
 new 
 #[Layout('components.layouts.module-layout', ['module' => 'CMS' ])]
@@ -69,11 +70,7 @@ class extends Component {
             {{-- Search --}}
             @include('livewire.cms.department.components.search')
             {{-- CREATE an instance of a model --}}
-            @if (auth()->user()->can('access cm'))
-                <livewire:cms.department.create />
-            @endif
-            
-            @canDoAction('create', $submodule)
+            @canDoAction(ActionName::CREATE, $submodule)
                 <livewire:cms.department.create />
             @endcanDoAction
         </div>
