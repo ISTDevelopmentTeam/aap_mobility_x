@@ -13,11 +13,18 @@ class NavigationBar extends Component
      * Create a new component instance.
      */
 
-    public $currentModule;
+    public $submodules;
     
     public function __construct($module)
     {
-        $this->currentModule = Module::where('module_name', $module)->firstOrFail();
+        $currentModule = Module::where('module_name', $module)->firstOrFail();
+        $currentSubmodules = $currentModule->submodules;
+        
+        $isIncludedInTabs = [];
+        $tabs = [];
+        foreach($currentSubmodules as $currentSubmodule){
+            if(isset($isIncludedInTabs[$currentSubmodule->])
+        }
     }
 
     /**

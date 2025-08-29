@@ -106,11 +106,11 @@ class ModuleAndSubmoduleSeeder extends Seeder
                 'description' => 'Create, manage, and publish contents for the system',
                 'route_name' => 'cms',
                 'submodules' => [
-                    ['name' => 'Asset Categories', 'description' => 'Asset Categories of CMS', 'route_name' => 'cms.asset-categories'],
-                    ['name' => 'Asset Conditions', 'description' => 'Asset Conditions of CMS', 'route_name' => 'cms.asset-conditions'],
-                    ['name' => 'Asset Status', 'description' => 'Asset Status of CMS', 'route_name' => 'cms.asset-statuses'],
-                    ['name' => 'Departments', 'description' => 'Departments of CMS', 'route_name' => 'cms.departments'],
-                    ['name' => 'IT Brands', 'description' => 'IT Brands of CMS', 'route_name' => 'cms.it-brands'],
+                    ['name' => 'Asset Categories', 'description' => 'Asset Categories of CMS', 'route_name' => 'cms.asset-categories', 'group' => 'Asset'],
+                    ['name' => 'Asset Conditions', 'description' => 'Asset Conditions of CMS', 'route_name' => 'cms.asset-conditions', 'group' => 'Asset'],
+                    ['name' => 'Asset Status', 'description' => 'Asset Status of CMS', 'route_name' => 'cms.asset-statuses', 'group' => 'Asset'],
+                    ['name' => 'IT Brands', 'description' => 'IT Brands of CMS', 'route_name' => 'cms.it-brands', 'group' => 'Asset'],
+                    ['name' => 'Departments', 'description' => 'Departments of CMS', 'route_name' => 'cms.departments', ], 
                 ],
             ],
         ];
@@ -152,9 +152,10 @@ class ModuleAndSubmoduleSeeder extends Seeder
                 // Create or update submodule
                 $submodule = Submodule::updateOrCreate(
                     ['submodule_name' => $sub['name'], 'module_id' => $module->module_id],
-                    [
+                    [   
                         'submodule_description' => $sub['description'],
                         'submodule_route_name' => $sub['route_name'] ?? null,
+                        'submodule_group' => $sub['group'] ?? null,
                         'module_id' => $module->module_id,
                         'submodule_status' => 1,
                         'submodule_created' => now(),
